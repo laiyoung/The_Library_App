@@ -3,8 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getSingleBook } from "../api";
 
 
-
-
 export default function BookDetails() {
   const [bookDetails, setBookDetails] = useState({});
   const { id } = useParams();
@@ -22,7 +20,7 @@ export default function BookDetails() {
       <div className="single-card-view">
         <h3>{bookDetails.title}</h3>
         <h4> By: {bookDetails.author}</h4>
-        <img src={bookDetails.coverimage} alt= {bookDetails.title} />
+        <img src={bookDetails.coverimage} alt={bookDetails.title} />
         {bookDetails.available ? (
           <p className="available">Available to Borrow</p>
         ) : (
