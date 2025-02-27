@@ -1,5 +1,5 @@
 # The_Library_App
-Front end application for browsing and checking out books. Designed as an online library for the public.
+Front end application for browsing and checking out books. Designed as an online library for the public(Updated and public version of Book Buddy application).
 
 Netlify Link: 
 
