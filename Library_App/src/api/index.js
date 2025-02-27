@@ -1,5 +1,5 @@
 /** API Link */
-const API_URL = `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api`;
+export const API_URL = `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api`;
 
 /** Book Fetches + Updates */
 
@@ -30,7 +30,7 @@ export async function getSingleBook(id) {
 }
 
 // Updating Book Availability:
-/** This ended up embedded in the Account View API Calls  */
+/** Embedded in the Account View API Calls  */
 
 
 /** Registration + Authentification */
@@ -70,17 +70,14 @@ export async function accountLogin(userLogin) {
 }
 
 // Get User Info with Token:
-/** I think this function has to be inside the React component. I couldn't
- * get it to work in the seperate API document. 
- */
-
+/** Embedded in Account View */
 
 
 /** User Account Actions */
 
 // Getting User's Book Reservations:
-/** This ended up embedded in the Account View API Calls  */
+/** Embedded in the Account View API Calls  */
 
 // Delete Book Reservation:
-/** This ended up embedded in the Account View API Calls  */
+/** Embedded in the Account View API Calls  */
 
