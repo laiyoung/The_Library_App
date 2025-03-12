@@ -72,8 +72,6 @@ function App() {
               <Login
                 setToken={setToken}
                 token={token}
-                user={user}
-                setUser={setUser}
               />
             }
           />
