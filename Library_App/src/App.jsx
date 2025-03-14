@@ -15,7 +15,6 @@ function App() {
   const [books, setBooks] = useState([]);
   const [availableBooks, setAvailableBooks] = useState([]);
   const [results, setResults] = useState([]);
-  const [user, setUser] = useState({});
   const [search, setSearch] = useState("");
 
 
