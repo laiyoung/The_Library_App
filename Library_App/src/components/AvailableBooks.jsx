@@ -7,35 +7,38 @@ export default function AvailableBooks({
   reservations,
   setAvailableBooks,
   availableBooks,
+  books,
+  refresh,
+  setRefresh
 }) {
-  async function handleReservation(bookId, book) {
+  async function handleReservation(bookId) {
     try {
-      const response = await fetch(`${API_URL}/books/${bookId}`, {
-        method: "PATCH",
+      const response = await fetch(`${API_URL}/reservations`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          available: !book.available,
+          bookId,
         }),
       });
       const result = await response.json();
-      setReservations([...reservations, result.book]);
-      setAvailableBooks((prevAvailable) =>
-        prevAvailable.filter((book) => book.id !== result.book.id)
-      );
-     
+      setReservations([...reservations, result]);
+      const newAvailableBooks = books.filter((book)=> book.available === true)
+      setAvailableBooks(newAvailableBooks);
+      setRefresh(!refresh)
     } catch (error) {
       console.error(error);
     }
   }
 
+
   return (
     <>
       <div className="article">
-        {availableBooks.map((book) => {
-          return (
+        {availableBooks && (availableBooks.map((book) => 
+          (
             <div key={book.id} className="book-card">
               <h3>{book.title}</h3>
               <h4> By: {book.author}</h4>
@@ -55,8 +58,8 @@ export default function AvailableBooks({
                 Reserve Book
               </button>
             </div>
-          );
-        })}
+          )
+        ))}
       </div>
     </>
   );

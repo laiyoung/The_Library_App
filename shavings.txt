@@ -1,0 +1,7 @@
+setAvailableBooks((prevAvailable) =>
+        prevAvailable.filter((book) => book.id !== result.book.id)
+      );
+      
+setReservations((prevReserved) =>
+        prevReserved.filter((reserved) => reserved.id !== deletedReservation.id)
+      );

@@ -12,7 +12,7 @@ export async function getAllBooks() {
       },
     });
     const result = await response.json();
-    return result.books;
+    return result;
   } catch (error) {
     console.error("Uh oh, trouble fetching books!", error);
   }
@@ -23,7 +23,7 @@ export async function getSingleBook(id) {
   try {
     const response = await fetch(API_URL + `/books/${id}`);
     const result = await response.json();
-    return result.book;
+    return result;
   } catch (error) {
     console.error(error);
   }
@@ -63,6 +63,7 @@ export async function accountLogin(userLogin) {
       body: JSON.stringify(userLogin),
     });
     const result = await response.json();
+    // console.log(result);
     return result.token;
   } catch (error) {
     console.error(error);

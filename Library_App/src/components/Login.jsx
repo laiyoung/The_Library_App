@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { accountLogin } from "../api";
 
-export default function Login({ setToken }) {
+export default function Login({ setToken, token }) {
   const navigate = useNavigate();
   const [userLogin, setUserLogin] = useState({
     email: "",
@@ -26,6 +26,7 @@ export default function Login({ setToken }) {
     setToken(await accountLogin(userLogin));
     navigate("/account-view");
   }
+
 
   return (
     <>

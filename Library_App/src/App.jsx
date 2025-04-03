@@ -16,6 +16,7 @@ function App() {
   const [availableBooks, setAvailableBooks] = useState([]);
   const [results, setResults] = useState([]);
   const [search, setSearch] = useState("");
+  const[refresh, setRefresh] = useState(false);
 
 
   useEffect(() => {
@@ -25,7 +26,7 @@ function App() {
       setAvailableBooks(bookData.filter((book) => book.available === true));
     }
     getData();
-  }, [availableBooks.length]); 
+  }, [refresh]); 
 
   if (!books) {
     return <section className="loading">Loading...</section>;
@@ -83,6 +84,8 @@ function App() {
                 books={books}
                 availableBooks={availableBooks}
                 setAvailableBooks={setAvailableBooks}
+                setRefresh={setRefresh}
+                refresh={refresh}
               />
             }
           />

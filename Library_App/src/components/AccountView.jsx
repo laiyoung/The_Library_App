@@ -2,14 +2,19 @@ import React, { useEffect, useState } from "react";
 import AvailableBooks from "./AvailableBooks";
 import { API_URL } from "../api";
 
+
 export default function AccountView({
   token,
   availableBooks,
   setAvailableBooks,
+  books,
+  refresh,
+  setRefresh,
 }) {
   const [error, setError] = useState(null);
   const [userData, setUserData] = useState(null);
   const [reservations, setReservations] = useState([]);
+  const bookStack = "./assets/bookstackvector.png";
 
   useEffect(() => {
     async function fetchAccount() {
@@ -46,13 +51,13 @@ export default function AccountView({
           },
         });
         const booksResult = await booksResponse.json();
-        setReservations(booksResult.reservation);
+        setReservations(booksResult);
       } catch {
         console.error;
       }
     }
     fetchReservations();
-  }, [token, reservations.length]); 
+  }, [token, reservations.length]);
   if (error) {
     return <p>Error: {error}</p>;
   }
@@ -63,24 +68,19 @@ export default function AccountView({
 
   async function handleReturn(resId) {
     try {
-      const response = await fetch(`${API_URL}/reservations/${resId}`, {
+       await fetch(`${API_URL}/reservations/${resId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
-    
-      const { deletedReservation } = await response.json();
 
       setReservations((prevReserved) =>
-        prevReserved.filter((reserved) => reserved.id !== deletedReservation.id)
+        prevReserved.filter((reserved) => reserved.id !== resId)
       );
-      
-      setAvailableBooks((prevAvailable) => [
-        ...prevAvailable,
-        deletedReservation,
-      ]);
+
+      setRefresh(!refresh);
     } catch (error) {
       console.error(error);
     }
@@ -105,7 +105,7 @@ export default function AccountView({
               <div key={book.id} className="single-card-view">
                 <h3>{book.title}</h3>
                 <h4> By: {book.author}</h4>
-                <img src={book.coverimage} alt={book.title} />
+                <img src={book.coverimage || bookStack} alt={book.title} />
                 <h4> Description: </h4>
                 <p>{book.description} </p>
                 <button
@@ -131,6 +131,9 @@ export default function AccountView({
             reservations={reservations}
             setAvailableBooks={setAvailableBooks}
             availableBooks={availableBooks}
+            books={books}
+            setRefresh={setRefresh}
+            refresh={refresh}
           />
         </div>
       </div>
