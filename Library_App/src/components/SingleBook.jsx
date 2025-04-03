@@ -3,21 +3,19 @@ import { useNavigate } from "react-router-dom";
 
 export default function SingleBook({ book }) {
   const navigate = useNavigate();
-  const bookStack = "./assets/bookstackvector.png";
+  const bookStack = "../public/bookstackvector.png";
 
   function handleDetails() {
     navigate(`/${book.id}`);
   }
+ 
+  const bookCover = book.author === "J.R.R. Tolkien" ? bookStack : book.coverimage ;
 
   return (
     <div className="book-card">
       <h3>{book.title}</h3>
       <h4> By: {book.author}</h4>
-      <img
-        src={book.coverimage}
-        onError={(e) => (e.currentTarget.src = bookStack)}
-        alt={book.title || bookStack}
-      />
+      <img src={bookCover} alt={book.title} />
       {book.available ? (
         <p className="available">Available to Borrow</p>
       ) : (
