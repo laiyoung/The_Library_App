@@ -9,7 +9,7 @@ export default function AvailableBooks({
   availableBooks,
   books,
   refresh,
-  setRefresh
+  setRefresh,
 }) {
   async function handleReservation(bookId) {
     try {
@@ -25,24 +25,30 @@ export default function AvailableBooks({
       });
       const result = await response.json();
       setReservations([...reservations, result]);
-      const newAvailableBooks = books.filter((book)=> book.available === true)
+      const newAvailableBooks = books.filter((book) => book.available === true);
       setAvailableBooks(newAvailableBooks);
-      setRefresh(!refresh)
+      setRefresh(!refresh);
     } catch (error) {
       console.error(error);
     }
   }
-
-
+  const bookStack = "./bookstackvector.png";
+  
   return (
     <>
       <div className="article">
-        {availableBooks && (availableBooks.map((book) => 
-          (
+        {availableBooks &&
+          availableBooks.map((book) => (
             <div key={book.id} className="book-card">
               <h3>{book.title}</h3>
               <h4> By: {book.author}</h4>
-              <img src={book.coverimage} alt={book.title} />
+              <div className="image-wrapper">
+                <img
+                  style={{ display: "block", margin: "0 auto" }}
+                  src={book.author === "J.R.R. Tolkien" ? bookStack : book.coverimage}
+                  alt={book.title}
+                />
+              </div>
               {book.available ? (
                 <p className="available">Available to Borrow</p>
               ) : (
@@ -58,8 +64,7 @@ export default function AvailableBooks({
                 Reserve Book
               </button>
             </div>
-          )
-        ))}
+          ))}
       </div>
     </>
   );

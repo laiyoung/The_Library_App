@@ -7,6 +7,9 @@ export default function BookDetails() {
   const [bookDetails, setBookDetails] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
+  const bookStack = "./bookstackvector.png";
+  const bookCover =
+  bookDetails.author === "J.R.R. Tolkien" ? bookStack : bookDetails.coverimage;
 
   useEffect(() => {
     async function getBookDetails(id) {
@@ -15,12 +18,19 @@ export default function BookDetails() {
     getBookDetails(id);
   }, []);
 
+
   return (
     <>
       <div className="single-card-view">
         <h3>{bookDetails.title}</h3>
         <h4> By: {bookDetails.author}</h4>
-        <img src={bookDetails.coverimage} alt={bookDetails.title} />
+        <div className="image-wrapper">
+        <img
+          style={{ display: "block", margin: "0 auto" }}
+          src={bookCover}
+          alt={bookDetails.title}
+        />
+      </div>
         {bookDetails.available ? (
           <p className="available">Available to Borrow</p>
         ) : (

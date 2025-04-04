@@ -93,6 +93,20 @@ form button {
   padding: 0 15px 15px;
   margin: 0 10px 10px 0;
 }
+
+.image-wrapper {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 200px; 
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.book-card img {
+  height: auto; 
+  object-fit: contain; 
+}
 .single-card-view {
   display: flex;
   flex-direction: column;

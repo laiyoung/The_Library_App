@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import AvailableBooks from "./AvailableBooks";
 import { API_URL } from "../api";
 
-
 export default function AccountView({
   token,
   availableBooks,
@@ -14,7 +13,6 @@ export default function AccountView({
   const [error, setError] = useState(null);
   const [userData, setUserData] = useState(null);
   const [reservations, setReservations] = useState([]);
-  const bookStack = "./assets/bookstackvector.png";
 
   useEffect(() => {
     async function fetchAccount() {
@@ -68,7 +66,7 @@ export default function AccountView({
 
   async function handleReturn(resId) {
     try {
-       await fetch(`${API_URL}/reservations/${resId}`, {
+      await fetch(`${API_URL}/reservations/${resId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -101,11 +99,20 @@ export default function AccountView({
         <div className="article">
           {" "}
           {reservations.map((book) => {
+            const bookStack = "./bookstackvector.png";
+            const bookCover =
+              book.author === "J.R.R. Tolkien" ? bookStack : book.coverimage;
             return (
               <div key={book.id} className="single-card-view">
                 <h3>{book.title}</h3>
                 <h4> By: {book.author}</h4>
-                <img src={book.coverimage || bookStack} alt={book.title} />
+                <div className="image-wrapper">
+                  <img
+                    style={{ display: "block", margin: "0 auto" }}
+                    src={bookCover}
+                    alt={book.title}
+                  />
+                </div>
                 <h4> Description: </h4>
                 <p>{book.description} </p>
                 <button
