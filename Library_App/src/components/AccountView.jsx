@@ -83,6 +83,7 @@ export default function AccountView({
       console.error(error);
     }
   }
+  const bookStack = "./bookstackvector.png";
 
   return (
     <>
@@ -99,9 +100,7 @@ export default function AccountView({
         <div className="article">
           {" "}
           {reservations.map((book) => {
-            const bookStack = "./bookstackvector.png";
-            const bookCover =
-              book.author === "J.R.R. Tolkien" ? bookStack : book.coverimage;
+                          
             return (
               <div key={book.id} className="single-card-view">
                 <h3>{book.title}</h3>
@@ -109,7 +108,7 @@ export default function AccountView({
                 <div className="image-wrapper">
                   <img
                     style={{ display: "block", margin: "0 auto" }}
-                    src={bookCover}
+                    src={book.author === "J.R.R. Tolkien" ? bookStack : book.coverimage}
                     alt={book.title}
                   />
                 </div>
